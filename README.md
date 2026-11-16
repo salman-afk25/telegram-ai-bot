@@ -25,6 +25,13 @@ An agentic AI assistant for Telegram, built as a single Google Apps Script that 
 - **Gmail** read-only search and get through the Apps Script tool router
 - Apps Script services: `PropertiesService`, `CacheService`, `ContentService`, `LockService`, `ScriptApp` triggers
 
+## How it works
+
+1. Telegram delivers an update to the Apps Script web app; the secret parameter and chat ID allow-list are checked.
+2. `runAgent` sends the system prompt, mode instructions and cached history to Groq with the tool definitions.
+3. If the model requests tools, `runTool` runs web search, notes, reminders or Gmail and returns the output.
+4. The loop repeats until the model returns a final answer, which is posted back to the chat.
+
 ## Setup
 
 1. Create a Google Apps Script project and paste `Kode.gs` into it.
@@ -38,27 +45,3 @@ An agentic AI assistant for Telegram, built as a single Google Apps Script that 
 - No API keys, tokens, passwords or other secrets are stored in this repository.
 - All credentials are read from Script Properties only, never hard-coded in the code.
 - Only allow-listed chat IDs are served, and system prompts are kept separate from user input.
-## How it works
-
-1. Telegram delivers an update to the Apps Script web app; the secret parameter and chat ID allow-list are checked.
-2. `runAgent` sends the system prompt, mode instructions and cached history to Groq with the tool definitions.
-3. If the model requests tools, `runTool` runs web search, notes, reminders or Gmail and returns the output.
-4. The loop repeats until the model returns a final answer, which is posted back to the chat.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
